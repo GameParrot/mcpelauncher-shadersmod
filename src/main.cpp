@@ -13,21 +13,15 @@
 void (*mcpelauncher_preinithook)(const char*sym, void*val, void **orig);
 void (*mcpelauncher_log)(int level, const char* tag, const char* text);
 
-std::string modsDir;
+std::string dataDir = "/data/data/com.mojang.minecraftpe";
 std::vector<std::string> shadersList;
 
 extern "C" void __attribute__ ((visibility ("default"))) mod_preinit() {
     auto h = dlopen("libmcpelauncher_mod.so", 0);
 
-    Dl_info info;
-    dladdr(dlsym(h, "mod_preinit"), &info);
-    modsDir = info.dli_fname;
-
-    modsDir = modsDir.substr(0, modsDir.find_last_of("/"));
-
       DIR *dr;
    struct dirent *en;
-   dr = opendir((modsDir + "/shaders").c_str()); //open all directory
+   dr = opendir((dataDir + "/shaders").c_str()); //open all directory
    if (dr) {
       while ((en = readdir(dr)) != NULL) {
         if (strstr(en->d_name, ".material.bin")) {
@@ -48,7 +42,7 @@ extern "C" void __attribute__ ((visibility ("default"))) mod_preinit() {
                 strcat(pt1, fName.c_str());
                 strcat(pt1, " via AAssetManager");
                 mcpelauncher_log(0, "ShadersMod", pt1);
-                return AAssetManager_open(mgr, (modsDir + "/shaders/" + fName).c_str(), mode);
+                return AAssetManager_open(mgr, (dataDir + "/shaders/" + fName).c_str(), mode);
             } else {
                 return AAssetManager_open(mgr, filename, mode);
             }
@@ -67,7 +61,7 @@ extern "C" void __attribute__ ((visibility ("default"))) mod_preinit() {
                 strcat(pt1, fName.c_str());
                 strcat(pt1, " via fopen");
                 mcpelauncher_log(0, "ShadersMod", pt1);
-                return fopen((modsDir + "/shaders/" + fName).c_str(), mode);
+                return fopen((dataDir + "/shaders/" + fName).c_str(), mode);
             } else {
                 return fopen(filename, mode);
             }
