@@ -4,7 +4,7 @@ This is a mod for mcpelauncher-manifest that allows for RenderDragon shaders.
 
 Usage: 
 
-Put your shaders in a folder called shaders in the mods folder. RenderDragon shaders have an extension of `.material.bin`.  
+Put your shaders in a folder called shaders in the data root folder. RenderDragon shaders have an extension of `.material.bin`.  
 
 YSS shaders running with mod:  
 ![Shaders running](https://user-images.githubusercontent.com/85067619/233049451-6253095e-e5c9-433c-b2f3-5ccad202ecba.png)
