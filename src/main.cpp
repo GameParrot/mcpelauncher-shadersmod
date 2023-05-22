@@ -70,7 +70,7 @@ extern "C" void __attribute__ ((visibility ("default"))) mod_preinit() {
         }
     }, nullptr);
 
-    dlclose(h);
+    //dlclose(h);
 }
 
 extern "C" __attribute__ ((visibility ("default"))) void mod_init() {
